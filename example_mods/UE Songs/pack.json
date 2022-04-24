@@ -1,0 +1,6 @@
+{
+	"name": "UE Songs",
+	"description": "This mod is used as an example for the "MODS" folder.",
+	"restart":true,
+	"color": [0, 255, 255]
+}

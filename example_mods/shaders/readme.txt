@@ -1,2 +1,3 @@
-Put your custom shaders here
-it should include .frag files.
+|| Custom Shaders ||
+
+This folder no longer has a use since release 0.5.2h.

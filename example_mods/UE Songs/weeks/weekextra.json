@@ -1,0 +1,50 @@
+{
+	"storyName": "Bonus Songs",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"B3 Blammed",
+			"pico",
+			[
+				148,
+				22,
+				83
+			]
+		],
+		[
+			"Roses RS",
+			"senpai-pixel",
+			[
+				255,
+				120,
+				191
+			]
+		],
+		[
+			"Milf x Every Other Song",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Bonus Songs"
+}

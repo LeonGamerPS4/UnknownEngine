@@ -67,15 +67,24 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
+		['Uninstall', 0.2], //From 0% to 10%
+		['F', 0.3], //From 11% to 19%
+		['E', 0.4], //From 20% to 39%
+		['D', 0.5], //From 40% to 49%
+		['C', 0.6], //From 50% to 59%
+		['B', 0.69], //From 60% to 68%
+		['funni', 0.7], //69%
+		['A-', 0.8], //From 70% to 79%
+		['A', 0.84], //From 80% to 83%
+		['A+', 0.9], //From 84% to 89%
+		['S-', 0.91], //From 90% to 91%
+		['S', 0.92], //92%
+		['S+', 0.93], //93%
+		['SS-', 0.94], //94%
+		['SS', 0.95], //95%
+		['SS+', 0.96], //From 96% to 97%
+		['X-', 0.99], //98%
+		['X', 1], //99%
 		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -240,6 +249,7 @@ class PlayState extends MusicBeatState
 	public var inCutscene:Bool = false;
 	public var skipCountdown:Bool = false;
 	var songLength:Float = 0;
+	var kadeEngineWatermark:FlxText;
 
 	public var boyfriendCameraOffset:Array<Float> = null;
 	public var opponentCameraOffset:Array<Float> = null;
@@ -1032,10 +1042,10 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt = new FlxText(0, healthBarBG.y + 47, FlxG.width, "", 20);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
+		scoreTxt.borderSize = 1.00;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
@@ -2371,15 +2381,21 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
+		// Player 1
 		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
+		iconP1.animation.curAnim.curFrame = 1;
+		else if (healthBar.percent > 85)
+		iconP1.animation.curAnim.curFrame = 2;
 		else
-			iconP1.animation.curAnim.curFrame = 0;
+		iconP1.animation.curAnim.curFrame = 0;
 
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
+		// Player 2
+		if (healthBar.percent > 85)
+		iconP2.animation.curAnim.curFrame = 1;
+		else if (healthBar.percent < 20)
+		iconP2.animation.curAnim.curFrame = 2;
 		else
-			iconP2.animation.curAnim.curFrame = 0;
+		iconP2.animation.curAnim.curFrame = 0;
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -4419,9 +4435,10 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
+			if (sicks > 0) ratingFC = "MFC";
+			if (goods > 0) ratingFC = "SFC";
+			if (bads > 0) ratingFC = "GFC";
+			if (shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}
