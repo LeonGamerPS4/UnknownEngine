@@ -26,7 +26,14 @@ class Achievements {
 		["Hyperactive",					"Finish a Song without going Idle.",				'hype',					false],
 		["Just the Two of Us",			"Finish a Song pressing only two keys.",			'two_keys',				false],
 		["Toaster Gamer",				"Have you tried to run the game on a toaster?",		'toastie',				false],
-		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true]
+		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true],
+		["You Have My Permission...",	"Beat Week 1 on Expert with no Misses.",			'week1_expert',			false],
+		["No More Tricks And Treats",	"Beat Week 2 on Expert with no Misses.",			'week2_expert',			false],
+		["All Out Of Ammo",				"Beat Week 3 on Expert with no Misses.",			'week3_expert',			false],
+		["Sexy Milf Killer",			"Beat Week 4 on Expert with no Misses.",			'week4_expert',			false],
+		["Lemonade In The Snow",		"Beat Week 5 on Expert with no Misses.",			'week5_expert',			false],
+		["Game Over...",				"Beat Week 6 on Expert with no Misses.",			'week6_expert',			false],
+		["Well Played Little Shit.",	"Beat Week 7 on Expert with no Misses.",			'week7_expert',			 true],
 	];
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
