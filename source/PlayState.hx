@@ -155,6 +155,7 @@ class PlayState extends MusicBeatState
 	private var curSong:String = "";
 
 	public var gfSpeed:Int = 1;
+	public var healthPercentageDisplay:Float;
 	public var health:Float = 1;
 	public var combo:Int = 0;
 
@@ -186,6 +187,8 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
+	public var chartingSine:Float = 0;
+	public var chartingModeTxt:FlxText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -235,6 +238,7 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
+	var npsCounter:FlxText;
 	var judgementCounter:FlxText;
 	var scoreTxtTween:FlxTween;
 	
@@ -1017,7 +1021,7 @@ class PlayState extends MusicBeatState
 		moveCameraSection(0);
 
 		healthBarBG = new AttachedSprite('healthBar');
-		healthBarBG.y = FlxG.height * 0.89;
+		healthBarBG.y = FlxG.height * 0.9;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		healthBarBG.visible = !ClientPrefs.hideHud;
@@ -1026,7 +1030,7 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x + 5, healthBarBG.y + 5, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
@@ -1048,14 +1052,23 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 46.5, FlxG.width, "", 20);
+		scoreTxt = new FlxText(0, healthBarBG.y + 41, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.00;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 		
-		judgementCounter = new FlxText(20, 0, 0, "", 20);
+		npsCounter = new FlxText(20, FlxG.height - 390, 0);
+		npsCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		npsCounter.borderSize = 2;
+		npsCounter.borderQuality = 2;
+		npsCounter.scrollFactor.set();
+		npsCounter.cameras = [camHUD];
+		
+		add(npsCounter);
+		
+ 		judgementCounter = new FlxText(20, 0, 0, "", 20);
 		judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter.borderSize = 2;
 		judgementCounter.borderQuality = 2;
@@ -1073,15 +1086,24 @@ class PlayState extends MusicBeatState
 		versionTxt.scrollFactor.set();
 		add(versionTxt);
 
-
-		botplayTxt = new FlxText(820, timeBarBG.y + 675, FlxG.width - 800, "Botplay is enabled. Your score will not be saved.", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt = new FlxText(955, timeBarBG.y + 670, FlxG.width - 800, "Botplay is enabled.", 32);
+		botplayTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 675;
+		}
+		
+		chartingModeTxt = new FlxText(820, timeBarBG.y + 675, FlxG.width - 800, "", 32);
+		chartingModeTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		chartingModeTxt.scrollFactor.set();
+		chartingModeTxt.borderSize = 1.25;
+		chartingModeTxt.visible = cpuControlled;
+		add(chartingModeTxt);
+		if(ClientPrefs.downScroll) {
+			chartingModeTxt.y = 675;
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -1094,6 +1116,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		versionTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
+		chartingModeTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
@@ -2354,9 +2377,11 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | NPS: ' + nps + ' | Rating: ' + ratingName;
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | NPS: ' + nps + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 
 		if(botplayTxt.visible) {
@@ -2408,7 +2433,7 @@ class PlayState extends MusicBeatState
 		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
-
+		
 		var iconOffset:Int = 26;
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
@@ -2416,6 +2441,8 @@ class PlayState extends MusicBeatState
 
 		if (health > 2)
 			health = 2;
+
+		healthPercentageDisplay = health / 0.02;
 
 		// Player 1
 		if (healthBar.percent < 20)
@@ -2676,7 +2703,18 @@ class PlayState extends MusicBeatState
 		cancelMusicFadeTween();
 		MusicBeatState.switchState(new ChartingState());
 		chartingMode = true;
-
+		
+		if (chartingMode = true)
+			chartingModeTxt.text = 'Player used Charter, Score will not be saved.';
+			
+		if(chartingModeTxt.visible) {
+			chartingSine += 180;
+			chartingModeTxt.alpha = 1 - Math.sin((Math.PI * chartingSine) / 180);
+		} else if(botplayTxt.visible) {
+		botplayTxt.text = 'Charter and Botplay enabled, Score will not be saved.';
+		}
+		
+		
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
@@ -3228,7 +3266,7 @@ class PlayState extends MusicBeatState
 		} else {
 			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
-				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger', 'week1_expert', 'week2_expert', 'week3_expert', 'week4_expert', 'week5_expert', 'week6_expert','week7_expert']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -4320,7 +4358,7 @@ class PlayState extends MusicBeatState
 
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
-
+		
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
 		
@@ -4476,10 +4514,9 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "MFC";
-			if (goods > 0) ratingFC = "SFC";
-			if (bads > 0) ratingFC = "GFC";
-			if (shits > 0) ratingFC = "FC";
+			if (sicks > 0) ratingFC = "SFC";
+			if (goods > 0) ratingFC = "GFC";
+			if (bads > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}

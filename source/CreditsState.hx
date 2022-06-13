@@ -81,6 +81,13 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['Unknown Engine'],
+			['LeonGamer',		'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'279ADC'],
+			['aegislash81',		'aegislash',		'Main Co-Developer of Unknown Engine',							'https://www.tiktok.com/@aegislash81',	'279ADC'],
+			[''],
+			['Unknown Contributors'],
+			['ItJforJadeppn',	'jadeppn',		'Some Loading Screen \nfacts and tips',							'https://www.tiktok.com/@plasmapea1002',	'279ADC'],
+			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
@@ -89,7 +96,7 @@ class CreditsState extends MusicBeatState
 			['Former Engine Members'],
 			['bb-panzu',			'bb-panzu',			'Ex-Programmer of Psych Engine',							'https://twitter.com/bbsub3',			'389A58'],
 			[''],
-			['Engine Contributors'],
+			['Psych Contributors'],
 			['iFlicky',				'iflicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',	'https://twitter.com/flicky_i',			'AA32FE'],
 			['SqirraRNG',			'gedehari',			'Chart Editor\'s Sound Waveform base',						'https://twitter.com/gedehari',			'FF9300'],
 			['PolybiusProxy',		'polybiusproxy',	'.MP4 Video Loader Extension',								'https://twitter.com/polybiusproxy',	'FFEAA6'],

@@ -3,14 +3,18 @@
 	"difficulties": "Hard",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
-	"weekBefore": "tutorial",
 	"freeplayColor": [
 		146,
 		113,
 		253
 	],
+	"weekBefore": "tutorial",
 	"startUnlocked": true,
-	"hideStoryMode": false,
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
 	"songs": [
 		[
 			"B3 Blammed",
@@ -23,7 +27,7 @@
 		],
 		[
 			"Roses RS",
-			"senpai-pixel",
+			"senpai-angry-pixel",
 			[
 				255,
 				120,
@@ -40,11 +44,7 @@
 			]
 		]
 	],
-	"weekCharacters": [
-		"",
-		"bf",
-		"gf"
-	],
-	"hiddenUntilUnlocked": false,
-	"weekName": "Bonus Songs"
+	"hideStoryMode": false,
+	"weekName": "Bonus Songs",
+	"hiddenUntilUnlocked": false
 }

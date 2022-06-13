@@ -11,6 +11,8 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.addons.display.FlxBackdrop;
+import flixel.util.FlxGradient;
 import lime.utils.Assets;
 import flixel.FlxSubState;
 import Achievements;
@@ -26,6 +28,9 @@ class AchievementsMenuState extends MusicBeatState
 	private var achievementArray:Array<AttachedAchievement> = [];
 	private var achievementIndex:Array<Int> = [];
 	private var descText:FlxText;
+	
+	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerAch'), 0.2, 0.2, true, true);
+	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
 
 	override function create() {
 		#if desktop
@@ -38,6 +43,15 @@ class AchievementsMenuState extends MusicBeatState
 		menuBG.screenCenter();
 		menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);
+		
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x558DE7E5, 0xAAE6F0A9], 1, 90, true);
+		gradientBar.y = FlxG.height - gradientBar.height;
+		add(gradientBar);
+		gradientBar.scrollFactor.set(0, 0);
+
+		add(checker);
+		checker.scrollFactor.set(0, 0.07);
+		
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -77,6 +91,8 @@ class AchievementsMenuState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		checker.x -= 0.21;
+		checker.y -= 0.51;
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);

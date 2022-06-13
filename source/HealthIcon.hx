@@ -34,6 +34,7 @@ class HealthIcon extends FlxSprite
 		else changeIcon('bf');
 	}
 
+	private var iconOffsets:Array<Float> = [0, 0];
 	public function changeIcon(char:String) {
 		if(this.char != char) {
 			var name:String = 'icons/' + char;
@@ -41,7 +42,13 @@ class HealthIcon extends FlxSprite
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
 			var file:Dynamic = Paths.image(name);
 
-			loadGraphic(file, true, 150, 150);
+			loadGraphic(file); //Load stupidly first for getting the file size
+			loadGraphic(file, true, Math.floor(width / 3), Math.floor(height)); //Then load it fr
+			iconOffsets[0] = (width - 150) / 3;
+			iconOffsets[1] = (width - 150) / 3;
+			iconOffsets[2] = (width - 150) / 3;
+			updateHitbox();
+
 			animation.add(char, [0, 1, 2], 0, false, isPlayer);
 			animation.play(char);
 			this.char = char;
@@ -51,6 +58,13 @@ class HealthIcon extends FlxSprite
 				antialiasing = false;
 			}
 		}
+	}
+
+	override function updateHitbox()
+	{
+		super.updateHitbox();
+		offset.x = iconOffsets[0];
+		offset.y = iconOffsets[1];
 	}
 
 	public function getCharacter():String {

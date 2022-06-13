@@ -1,18 +1,3 @@
-# Unknown Engine
-An engine based on Psych Engine but with minor differences, and more features. Some of these features are:
-
-## Randomized Loading Screens
-![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/loadingScreens/loadingscreen-1.png?raw=true)
-
-## Winning Icons for every character (450x150)
-![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/icons/icon-bf.png?raw=true)
-
-## Insane/Expert/Noob difficulties (Inspired by Mic'd Up engine)
-
-![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/menudifficulties/expert.png?raw=true)
-
-![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/menudifficulties/noob.png?raw=true)
-
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 

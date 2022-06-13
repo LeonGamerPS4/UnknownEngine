@@ -43,15 +43,20 @@ class Cache extends MusicBeatState
 		FlxG.mouse.visible = false;
 
 		FlxG.worldBounds.set(0,0);
+		
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Unknown Engine", null);
+		#end
 
 		bitmapData = new Map<String,FlxGraphic>();
 		bitmapData2 = new Map<String,FlxGraphic>();
 
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingScreens/loadingscreen-' + FlxG.random.int(1, 4)));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingScreens/loadingscreen-' + FlxG.random.int(1, 9)));
 		menuBG.screenCenter();
 		add(menuBG);
 
-		shitz = new FlxText(12, 630, 300, "Loading...", 12);
+		shitz = new FlxText(540, 630, 300, "Loading...", 12);
 		shitz.scrollFactor.set();
 		shitz.setFormat("VCR OSD Mono", 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(shitz);
