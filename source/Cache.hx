@@ -43,11 +43,6 @@ class Cache extends MusicBeatState
 		FlxG.mouse.visible = false;
 
 		FlxG.worldBounds.set(0,0);
-		
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading Unknown Engine", null);
-		#end
 
 		bitmapData = new Map<String,FlxGraphic>();
 		bitmapData2 = new Map<String,FlxGraphic>();
