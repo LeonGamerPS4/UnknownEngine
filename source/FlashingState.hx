@@ -24,8 +24,8 @@ class FlashingState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"WARNING:\n
-			Unknown Engine can or WILL contain flashing lights.\n
+			"Hey, watch out!\n
+			This Mod contains some flashing lights!\n
 			Press ENTER to disable them now or go to Options Menu.\n
 			Press ESCAPE to ignore this message.\n
 			You've been warned!",

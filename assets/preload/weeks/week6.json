@@ -1,43 +1,22 @@
 {
-	"storyName": "hating simulator ft. moawling",
-	"hideFreeplay": false,
-	"weekBackground": "school",
-	"weekBefore": "week5",
-	"startUnlocked": true,
+	"songs": [
+		["Senpai", "senpai-pixel", [255, 120, 191]],
+		["Roses", "senpai-pixel", [255, 120, 191]],
+		["Thorns", "spirit-pixel", [255, 120, 191]]
+	],
+
 	"weekCharacters": [
 		"senpai",
 		"bf",
 		"gf"
 	],
-	"songs": [
-		[
-			"Senpai",
-			"senpai-pixel",
-			[
-				255,
-				120,
-				191
-			]
-		],
-		[
-			"Roses",
-			"senpai-angry-pixel",
-			[
-				255,
-				120,
-				191
-			]
-		],
-		[
-			"Thorns",
-			"spirit-pixel",
-			[
-				255,
-				120,
-				191
-			]
-		]
-	],
+	"weekBackground": "school",
+
+	"storyName": "hating simulator ft. moawling",
+	"weekBefore": "week5",
+	"weekName": "Week 6",
+	"startUnlocked": true,
+
 	"hideStoryMode": false,
-	"weekName": "Week 6"
+	"hideFreeplay": false
 }
